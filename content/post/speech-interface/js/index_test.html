@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+  <script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="WebAudioRecorder.js"></script>
+</head>
+<body>
+  <button id='start-recording'>Start</button>
+  <button id='stop-recording' disabled>Stop</button>
+  <div id='plotdiv'></div>
+  <div id="page-audio-container"><audio id="page-audio" controls style="visibility:hidden;"></audio></div>
+  <div id="response">
+      <pre></pre>
+  </div>
+  <script>
+
+    const startRecording = document.getElementById('start-recording');
+    const stopRecording = document.getElementById('stop-recording');
+
+    URL = window.URL || window.webkitURL;
+
+    let audioRecorder
+
+    navigator.getUserMedia({
+        audio: true
+    }, function(stream) {
+
+        var audioCtx = new AudioContext();
+        var source = audioCtx.createMediaStreamSource(stream);
+        audioRecorder = new WebAudioRecorder(source, {
+          workerDir: "js/"     // must end with slash
+        });
+
+        audioRecorder.onComplete = function(recorder, blob) {
+          var audioDataURL = URL.createObjectURL(blob);
+          showPlaybackTools(audioDataURL)
+        };
+
+      },function(error) {
+          console.error(JSON.stringify(error));
+      })
+
+    function showPlaybackTools(data) {
+        // Audio Player
+        let playerDiv = document.getElementById('page-audio-container')
+        let url;
+        if (data instanceof Blob) {
+            const blob = new Blob(data, { type: mimeType });
+            url = (URL.createObjectURL(blob));
+        } else {
+            url = data;
+        }
+        let player = playerDiv.querySelector('#page-audio');
+        player.src = url;
+        player.style.visibility = "visible";
+    }
+
+    startRecording.onclick = function() {
+      startRecording.disabled = true;
+      stopRecording.disabled = false;
+      audioRecorder.startRecording();
+    }
+
+    stopRecording.onclick = function() {
+      startRecording.disabled = false;
+      stopRecording.disabled = true;
+      audioRecorder.finishRecording();
+    }
+
+  </script>
+</body>
+</html>

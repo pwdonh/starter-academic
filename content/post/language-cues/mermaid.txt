@@ -1,0 +1,21 @@
+```mermaid
+graph LR
+spec(<font size=2>Spectrogram) --> conv[<font size=2>Convolutional<br>layers]
+conv --> rnn1[<font size=2>Recurrent<br>layer 1]
+rnn1 --> cphon((<font size=2>Phonemes))
+rnn1 --> rnn2[<font size=2>Recurrent<br>layer 2]
+rnn2 --> cword((<font size=2>Words))
+classDef whiteBox fill:#ddd,stroke:#888,stroke-width:2px;
+class spec,conv,rnn1,rnn2,cphon,cword whiteBox
+```
+
+```mermaid
+graph LR
+spec(<font size=2>Spectrogram) --> conv[<font size=2>Convolutional<br>layers]
+conv --> rnn1[<font size=2>Recurrent<br>layer 1]
+rnn1 --> rnn2[<font size=2>Recurrent<br>layer 2]
+rnn1 --> clang((<font size=2>Language))
+rnn2 --> clang
+classDef whiteBox fill:#ddd,stroke:#888,stroke-width:2px;
+class spec,conv,rnn1,rnn2,cat,clang whiteBox
+```
