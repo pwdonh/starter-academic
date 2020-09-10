@@ -2,7 +2,7 @@
 authors:
 - admin
 categories:
-- Demo
+- None
 date: "2020-04-01T00:00:00Z"
 draft: true
 featured: false
@@ -20,7 +20,7 @@ projects: []
 subtitle: ''
 summary: Web-demo for the phonetic language model in our recent paper.
 tags:
-- Academic
+- None
 title: 'Speech recording'
 ---
 

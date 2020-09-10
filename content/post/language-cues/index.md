@@ -2,7 +2,7 @@
 authors:
 - admin
 categories:
-- Demo
+- None
 date: "2020-04-01T00:00:00Z"
 draft: true
 featured: false
@@ -20,7 +20,7 @@ projects: []
 subtitle: ''
 summary: Web-demo for the phonetic language model in our recent paper.
 tags:
-- Academic
+- None
 title: 'Distinctive language cues'
 ---
 This is work coming out of discussions on bilingualism with my postdoc advisor Denise Klein as well as developmental researchers Krista Byers-Heinlein, Linda Polka and Lena Kremin. A big question in bilingual language learning is how an infant learns to discriminate languages.
